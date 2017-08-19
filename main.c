@@ -8,6 +8,9 @@ int main(int argc, char* args[])
 {
 	SDL_Window *window = NULL;
 	SDL_Surface *screenSurface = NULL;
+	int quit = 0;
+	SDL_Event e;
+	int color = 1;
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -30,7 +33,36 @@ int main(int argc, char* args[])
 	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0, 200, 30));
 	SDL_UpdateWindowSurface(window);
 
-	SDL_Delay(2000);
+	while (quit == 0)
+	{
+		switch (color)
+		{
+		case 1:
+			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 255, 0, 0));
+			SDL_UpdateWindowSurface(window);
+			break;
+		case 2:
+			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0, 0, 255));
+			SDL_UpdateWindowSurface(window);
+			break;
+		case 3:
+			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0, 200, 30));
+			SDL_UpdateWindowSurface(window);
+			color = 0;
+			break;
+		default:
+			color = 0;
+			break;
+		}
+		color++;
+		SDL_Delay(100);
+		while (SDL_PollEvent(&e) != 0)
+		{
+			if (e.type == SDL_QUIT)
+				quit = 1;
+		}	
+		
+	}
 
 	SDL_DestroyWindow(window);
 	SDL_Quit();
