@@ -27,7 +27,7 @@ int main(int argc, char* args[])
 	}
 
 	screenSurface = SDL_GetWindowSurface(window);
-	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 255, 255, 255));
+	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0, 200, 30));
 	SDL_UpdateWindowSurface(window);
 
 	SDL_Delay(2000);
